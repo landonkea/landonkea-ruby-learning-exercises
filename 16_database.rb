@@ -15,6 +15,20 @@ db = SQLite3::Database.new("tasks.db")
 db.results_as_hash = true         # Makes query results come back as hashes (with column names as keys)
                                   # instead of plain arrays. So row["name"] works instead of row[1].
 
+db.execute("CREATE TABLE IF NOT EXISTS tasks (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  done BOOLEAN NOT NULL DEFAULT 0
+)")                                # WHY: SQLite.new only opens/creates the .db FILE — it does not create
+                                  # any tables inside it. Without this, the very first query below
+                                  # (INSERT/SELECT/UPDATE/DELETE) would fail with
+                                  # "SQLite3::SQLException: no such table: tasks" on a fresh database.
+                                  # "IF NOT EXISTS" makes this safe to run every time the script starts —
+                                  # it creates the table once and does nothing on later runs.
+                                  # id: auto-incrementing primary key (SQLite's row identifier).
+                                  # name: the task text, required (NOT NULL).
+                                  # done: 0/1 completion flag, defaults to 0 (not done) for new rows.
+
 def add_task(db, name)            # Defines add_task — inserts a row into the tasks table.
   db.execute("INSERT INTO tasks (name, done) VALUES (?, ?)", [name, 0])
                                   # "db.execute" runs a SQL command on the database.
