@@ -4,7 +4,7 @@
 # CONCEPTS: SQLite3, SQL queries, database tables, primary keys
 # ============================================================
 
-require "sqlite3"                 # Loads the sqlite3 gem — a library that lets Ruby talk to SQLite databases.
+require "sqlite3"                 # Loads the sqlite3 gem, a library that lets Ruby talk to SQLite databases.
                                   # SQLite is a lightweight database engine that stores data in a single file.
 
 db = SQLite3::Database.new("tasks.db")
@@ -19,26 +19,26 @@ db.execute("CREATE TABLE IF NOT EXISTS tasks (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   done BOOLEAN NOT NULL DEFAULT 0
-)")                                # WHY: SQLite.new only opens/creates the .db FILE — it does not create
+)")                                # WHY: SQLite.new only opens/creates the .db FILE, it does not create
                                   # any tables inside it. Without this, the very first query below
                                   # (INSERT/SELECT/UPDATE/DELETE) would fail with
                                   # "SQLite3::SQLException: no such table: tasks" on a fresh database.
-                                  # "IF NOT EXISTS" makes this safe to run every time the script starts —
+                                  # "IF NOT EXISTS" makes this safe to run every time the script starts,
                                   # it creates the table once and does nothing on later runs.
                                   # id: auto-incrementing primary key (SQLite's row identifier).
                                   # name: the task text, required (NOT NULL).
                                   # done: 0/1 completion flag, defaults to 0 (not done) for new rows.
 
-def add_task(db, name)            # Defines add_task — inserts a row into the tasks table.
+def add_task(db, name)            # Defines add_task, inserts a row into the tasks table.
   db.execute("INSERT INTO tasks (name, done) VALUES (?, ?)", [name, 0])
                                   # "db.execute" runs a SQL command on the database.
                                   # INSERT INTO tasks adds a new row to the "tasks" table.
-                                  # The (?) are "placeholders" — they get filled by the values in [name, 0].
+                                  # The (?) are "placeholders", they get filled by the values in [name, 0].
                                   # Using placeholders prevents SQL injection attacks (a security thing).
                                   # The name goes in the "name" column, 0 (false) goes in "done".
 end                               # Closes add_task.
 
-def list_tasks(db)                # Defines list_tasks — reads all rows from the database.
+def list_tasks(db)                # Defines list_tasks, reads all rows from the database.
   rows = db.execute("SELECT * FROM tasks")
                                   # "SELECT * FROM tasks" fetches ALL columns from ALL rows in the tasks table.
                                   # Returns an array of hashes (because of results_as_hash = true).
@@ -52,27 +52,27 @@ def list_tasks(db)                # Defines list_tasks — reads all rows from t
   end                             # Closes the loop.
 end                               # Closes list_tasks.
 
-def complete_task(db, id)         # Defines complete_task — marks a task done by its database ID.
+def complete_task(db, id)         # Defines complete_task, marks a task done by its database ID.
   db.execute("UPDATE tasks SET done = 1 WHERE id = ?", [id])
                                   # "UPDATE tasks SET done = 1" changes the "done" column to 1 (true).
                                   # "WHERE id = ?" ensures we only update the row with that specific ID.
                                   # Without WHERE, ALL tasks would be marked done!
 end                               # Closes complete_task.
 
-def uncomplete_task(db, id)       # Defines uncomplete_task — marks a task as not done.
+def uncomplete_task(db, id)       # Defines uncomplete_task, marks a task as not done.
   db.execute("UPDATE tasks SET done = 0 WHERE id = ?", [id])
                                   # Sets "done" to 0 (false) for the task with that ID.
 end                               # Closes uncomplete_task.
 
-def edit_task(db, id, new_name)   # Defines edit_task — changes a task's name in the database.
+def edit_task(db, id, new_name)   # Defines edit_task, changes a task's name in the database.
   db.execute("UPDATE tasks SET name = ? WHERE id = ?", [new_name, id])
                                   # Updates the "name" column to new_name for the task with that ID.
 end                               # Closes edit_task.
 
-def delete_task(db, id)           # Defines delete_task — removes a task from the database permanently.
+def delete_task(db, id)           # Defines delete_task, removes a task from the database permanently.
   db.execute("DELETE FROM tasks WHERE id = ?", [id])
                                   # "DELETE FROM tasks" removes the row with the matching ID.
-                                  # This is permanent — there's no undo in the database!
+                                  # This is permanent, there's no undo in the database!
 end                               # Closes delete_task.
 
 loop do                           # Infinite loop for the interactive menu.
@@ -100,7 +100,7 @@ loop do                           # Infinite loop for the interactive menu.
   elsif choice == "3"             # Mark complete.
     list_tasks(db)                # Shows tasks so user can see the IDs.
     print "Which task id to complete? "
-                                  # Asks for the database ID (not array index — IDs are permanent).
+                                  # Asks for the database ID (not array index, IDs are permanent).
     id = gets.chomp.to_i          # Reads the ID as an integer.
     complete_task(db, id)         # Updates the database.
   elsif choice == "4"             # Mark incomplete.
@@ -118,7 +118,7 @@ loop do                           # Infinite loop for the interactive menu.
     new_name = gets.chomp.strip   # Reads and strips whitespace.
     edit_task(db, id, new_name) unless new_name == ""
                                   # Updates the name, but ONLY if it's not empty.
-                                  # "unless" means "if not" — the opposite of if.
+                                  # "unless" means "if not", the opposite of if.
   elsif choice == "6"             # Delete task.
     list_tasks(db)                # Shows tasks.
     print "Which task id to delete? "

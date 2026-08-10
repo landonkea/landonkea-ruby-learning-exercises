@@ -56,7 +56,7 @@ def load_tasks                    # Loads tasks from disk.
 end                               # Closes load_tasks.
 
 def get_valid_index(tasks, prompt)
-                                  # Safe input handler — prevents crashes from bad input.
+                                  # Safe input handler, prevents crashes from bad input.
   print prompt                    # Displays the question.
   input = gets.chomp              # Reads user input.
   index = Integer(input) - 1      # Converts to integer, adjusts to 0-based index.

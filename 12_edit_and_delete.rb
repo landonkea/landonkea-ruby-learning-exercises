@@ -1,18 +1,18 @@
 # ============================================================
 # FILE: 12_edit_and_delete.rb
-# PURPOSE: Full task manager — add, list, complete, edit, delete.
+# PURPOSE: Full task manager, add, list, complete, edit, delete.
 # CONCEPTS: all previous concepts + editing hashes, deleting from arrays
 # ============================================================
 
 require "json"                    # Loads the JSON library for file I/O.
 
-def add_task(tasks, name)         # Defines add_task — creates and appends a task hash.
+def add_task(tasks, name)         # Defines add_task, creates and appends a task hash.
   task = { name: name, done: false }
                                   # Hash with :name (the text) and :done (starts false).
   tasks << task                   # Appends to the tasks array.
 end                               # Closes add_task.
 
-def list_tasks(tasks)             # Defines list_tasks — displays all tasks numbered.
+def list_tasks(tasks)             # Defines list_tasks, displays all tasks numbered.
   tasks.each_with_index do |task, i|
                                   # Loops with both the task hash and its index (position).
     status = task[:done] ? "✓" : " "
@@ -31,13 +31,13 @@ def uncomplete_task(tasks, index) # Marks a task as NOT done by index.
 end                               # Closes uncomplete_task.
 
 def edit_task(tasks, index, new_name)
-                                  # Defines edit_task — changes a task's name.
+                                  # Defines edit_task, changes a task's name.
   tasks[index][:name] = new_name  # Accesses the task at "index" and replaces :name with new_name.
 end                               # Closes edit_task.
 
-def delete_task(tasks, index)     # Defines delete_task — removes a task from the array.
+def delete_task(tasks, index)     # Defines delete_task, removes a task from the array.
   tasks.delete_at(index)          # ".delete_at" removes the item at the given position.
-                                  # The array shrinks — everything after shifts down by one.
+                                  # The array shrinks, everything after shifts down by one.
 end                               # Closes delete_task.
 
 def save_tasks(tasks)             # Saves tasks to disk as JSON.
@@ -108,7 +108,7 @@ loop do                           # Infinite loop for the interactive menu.
     delete_task(tasks, index)     # Removes the task from the array.
     save_tasks(tasks)             # Saves to disk.
   elsif choice == "7"             # Quit.
-    break                         # Exits the loop — program ends.
+    break                         # Exits the loop, program ends.
   else                            # Invalid input.
     puts "Invalid option, try again."
                                   # Tells user to enter a valid number.

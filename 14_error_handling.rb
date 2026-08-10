@@ -60,10 +60,10 @@ def get_valid_index(tasks, prompt)
   print prompt                    # Displays the prompt text (e.g., "Which task number to complete? ").
   input = gets.chomp              # Reads user input and removes trailing newline.
   index = Integer(input) - 1      # "Integer()" tries to convert the string to a number.
-                                  # If input is "abc", it raises an ArgumentError — caught by rescue below.
+                                  # If input is "abc", it raises an ArgumentError, caught by rescue below.
                                   # Subtract 1 to convert from human numbering (1-based) to array index (0-based).
   if index < 0 || index >= tasks.length
-                                  # Checks if the index is out of bounds — negative or too large.
+                                  # Checks if the index is out of bounds, negative or too large.
     puts "That task number doesn't exist."
                                   # Tells the user the number is invalid.
     return nil                    # Returns nil (Ruby's "nothing" value) to signal failure.
@@ -101,8 +101,8 @@ loop do                           # Infinite loop for the interactive menu.
     tasks.each_with_index { |task, i| task.display(i) }
                                   # Shows tasks with numbers.
     index = get_valid_index(tasks, "Which task number to complete? ")
-                                  # Uses the safe input method — returns nil if input was bad.
-    unless index.nil?             # "unless nil?" means "if it's NOT nil" — input was valid.
+                                  # Uses the safe input method, returns nil if input was bad.
+    unless index.nil?             # "unless nil?" means "if it's NOT nil", input was valid.
       tasks[index].complete       # Marks the task as done.
       save_tasks(tasks)           # Saves to disk.
     end                           # Closes the unless block.

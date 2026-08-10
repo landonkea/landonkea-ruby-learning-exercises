@@ -1,4 +1,4 @@
-# landonkea-ruby-learning-exercises — Design & Workflow
+# landonkea-ruby-learning-exercises - Design & Workflow
 
 ## High-Level Overview
 

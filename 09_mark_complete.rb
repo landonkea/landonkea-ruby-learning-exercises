@@ -21,10 +21,10 @@ def list_tasks(tasks)             # Defines list_tasks to display all tasks with
   end                             # Closes the loop.
 end                               # Closes list_tasks.
 
-def complete_task(tasks, name)    # Defines a NEW method — finds a task by name and marks it done.
+def complete_task(tasks, name)    # Defines a NEW method, finds a task by name and marks it done.
   tasks.each do |task|            # Loops through every task hash in the array.
     if task[:name] == name        # Checks if this task's :name matches the name we're looking for.
-      task[:done] = true          # If it matches, set :done to true — the task is now complete!
+      task[:done] = true          # If it matches, set :done to true, the task is now complete!
     end                           # Closes the if statement.
   end                             # Closes the loop. (If no match found, nothing happens.)
 end                               # Closes complete_task.
@@ -35,4 +35,4 @@ add_task(tasks, "Call the bank")
 
 complete_task(tasks, "Buy groceries")      # Finds "Buy groceries" and marks it done.
 
-list_tasks(tasks)                 # Prints all tasks — "Buy groceries" should now show [✓].
+list_tasks(tasks)                 # Prints all tasks, "Buy groceries" should now show [✓].

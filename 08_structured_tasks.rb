@@ -6,9 +6,9 @@
 
 tasks = []                        # Creates an empty array to hold task hashes (not just strings anymore).
 
-def add_task(tasks, name)         # Defines add_task — takes the array and a task name string.
+def add_task(tasks, name)         # Defines add_task, takes the array and a task name string.
   task = { name: name, done: false }
-                                  # Creates a HASH — a collection of key-value pairs inside {}.
+                                  # Creates a HASH, a collection of key-value pairs inside {}.
                                   # :name is a "symbol" (like a labeled tag) mapped to the task name.
                                   # :done starts as false (the task is not yet complete).
                                   # Symbols are lightweight, fast identifiers used as hash keys.
@@ -32,4 +32,4 @@ add_task(tasks, "Buy groceries")           # Adds the first task hash to the arr
 add_task(tasks, "Finish portfolio project") # Adds the second task hash.
 add_task(tasks, "Call the bank")           # Adds the third task hash.
 
-list_tasks(tasks)                 # Prints all tasks — none are marked done yet.
+list_tasks(tasks)                 # Prints all tasks, none are marked done yet.

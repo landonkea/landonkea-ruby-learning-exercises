@@ -7,7 +7,7 @@
 def build_greeting(name)          # Defines a method named "build_greeting" that takes one input: "name".
   if name == "Landon"             # Checks if the name equals "Landon".
     "Hey, it's you!"              # This is the RETURN VALUE. In Ruby, the last expression in a method
-                                  # is automatically returned — no "return" keyword needed.
+                                  # is automatically returned, no "return" keyword needed.
                                   # This is called "implicit return".
   else                            # If name is anything other than "Landon"...
     "Hello, #{name}!"             # ...return this string instead. Both branches return a string.

@@ -6,7 +6,7 @@
 
 require "json"                    # Loads the JSON library for reading/writing JSON data.
 
-def add_task(tasks, name)         # Defines add_task — creates a task hash and appends it.
+def add_task(tasks, name)         # Defines add_task, creates a task hash and appends it.
   task = { name: name, done: false }
                                   # Hash with :name (string) and :done (boolean, starts false).
   tasks << task                   # Pushes the hash onto the tasks array.
@@ -38,7 +38,7 @@ def save_tasks(tasks)             # Saves the tasks array to a JSON file on disk
                                   # (with indentation). File.write writes it to "tasks.json".
 end                               # Closes save_tasks.
 
-def load_tasks                    # Defines load_tasks — reads tasks from disk when the program starts.
+def load_tasks                    # Defines load_tasks, reads tasks from disk when the program starts.
   if File.exist?("tasks.json")    # Checks if the file "tasks.json" exists on disk.
                                   # If the file doesn't exist yet, we skip to else and return an empty list.
     content = File.read("tasks.json")
@@ -47,13 +47,13 @@ def load_tasks                    # Defines load_tasks — reads tasks from disk
                                   # Converts the JSON string back into a Ruby array of hashes.
                                   # symbolize_names: true makes keys symbols (:name) instead of strings ("name").
   else                            # If the file doesn't exist (first time running)...
-    []                            # ...return an empty array — no saved tasks yet.
+    []                            # ...return an empty array, no saved tasks yet.
   end                             # Closes the if/else.
 end                               # Closes load_tasks.
 
 tasks = load_tasks               # Loads any previously saved tasks. Empty array if first run.
 
-loop do                           # "loop do" starts an infinite loop — repeats until "break" is hit.
+loop do                           # "loop do" starts an infinite loop, repeats until "break" is hit.
   puts "\n1. Add task"            # "\n" adds a blank line before the menu for readability.
   puts "2. List tasks"            # Displays menu option 2.
   puts "3. Mark task complete"    # Displays menu option 3.
@@ -85,7 +85,7 @@ loop do                           # "loop do" starts an infinite loop — repeat
     uncomplete_task(tasks, index) # Sets :done back to false.
     save_tasks(tasks)             # Saves to disk.
   elsif choice == "5"             # User chose to quit.
-    break                         # "break" exits the loop — the program ends.
+    break                         # "break" exits the loop, the program ends.
   else                            # User typed something invalid (not 1-5).
     puts "Invalid option, try again."
                                   # Tells them to try a valid number.

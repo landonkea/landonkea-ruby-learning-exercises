@@ -5,12 +5,12 @@
 # ============================================================
 
 require "json"                    # "require" loads an external library. "json" lets Ruby read/write
-                                  # JSON format — a common way to store structured data as text.
+                                  # JSON format, a common way to store structured data as text.
                                   # JSON looks like: {"name":"Buy groceries","done":false}
 
 tasks = []                        # Creates an empty array to hold task hashes.
 
-def add_task(tasks, name)         # Defines add_task — adds a new task hash to the array.
+def add_task(tasks, name)         # Defines add_task, adds a new task hash to the array.
   task = { name: name, done: false }
                                   # Creates a hash with :name and :done keys.
   tasks << task                   # Appends the hash to the tasks array.
@@ -25,7 +25,7 @@ def list_tasks(tasks)             # Defines list_tasks to display all tasks.
   end                             # Closes the loop.
 end                               # Closes list_tasks.
 
-def complete_task(tasks, name)    # Defines complete_task — marks a task done by name.
+def complete_task(tasks, name)    # Defines complete_task, marks a task done by name.
   tasks.each do |task|            # Loops through every task.
     if task[:name] == name        # Checks if this task's name matches.
       task[:done] = true          # Sets :done to true if it matches.
@@ -33,7 +33,7 @@ def complete_task(tasks, name)    # Defines complete_task — marks a task done 
   end                             # Closes the loop.
 end                               # Closes complete_task.
 
-def save_tasks(tasks)             # Defines a NEW method — saves the tasks array to a file.
+def save_tasks(tasks)             # Defines a NEW method, saves the tasks array to a file.
   File.write("tasks.json", tasks.to_json)
                                   # tasks.to_json converts the array into a JSON text string.
                                   # File.write creates/overwrites "tasks.json" with that string.

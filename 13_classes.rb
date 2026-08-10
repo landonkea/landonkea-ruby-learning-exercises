@@ -1,6 +1,6 @@
 # ============================================================
 # FILE: 13_classes.rb
-# PURPOSE: Organize tasks using a class — a blueprint for task objects.
+# PURPOSE: Organize tasks using a class, a blueprint for task objects.
 # CONCEPTS: class, attr_accessor, initialize, instance methods, @instance variables
 # ============================================================
 
@@ -15,13 +15,13 @@ class Task                        # "class" defines a blueprint. A Task class me
   def initialize(name, done = false)
                                   # "initialize" is a special method called automatically when you create
                                   # a new Task with Task.new("something"). It sets up the object's initial state.
-                                  # "done = false" means done is optional — if not provided, it defaults to false.
-    @name = name                  # "@name" is an instance variable — it belongs to THIS specific task object.
+                                  # "done = false" means done is optional, if not provided, it defaults to false.
+    @name = name                  # "@name" is an instance variable, it belongs to THIS specific task object.
                                   # It stores the task's name. The @ prefix makes it an instance variable.
     @done = done                  # "@done" stores whether the task is complete. Starts as false by default.
   end                             # Closes initialize.
 
-  def complete                    # Defines an instance method — called on a specific task object.
+  def complete                    # Defines an instance method, called on a specific task object.
     @done = true                  # Sets this task's :done to true.
   end                             # Closes complete.
 
@@ -29,13 +29,13 @@ class Task                        # "class" defines a blueprint. A Task class me
     @done = false                 # Sets this task's :done back to false.
   end                             # Closes uncomplete.
 
-  def to_h                        # Defines to_h — converts this task object back into a hash.
+  def to_h                        # Defines to_h, converts this task object back into a hash.
                                   # We need this because JSON can't save Ruby objects directly,
                                   # but it CAN save hashes.
     { name: @name, done: @done }  # Returns a hash with the task's data. This is called "serialization".
   end                             # Closes to_h.
 
-  def display(index)              # Defines display — prints this task with its number.
+  def display(index)              # Defines display, prints this task with its number.
     status = @done ? "✓" : " "   # Shows "✓" if done, " " if not.
     puts "#{index + 1}. [#{status}] #{@name}"
                                   # Prints formatted task: "1. [ ] Buy groceries"
@@ -86,7 +86,7 @@ loop do                           # Infinite loop for the interactive menu.
   elsif choice == "2"             # List tasks.
     tasks.each_with_index { |task, i| task.display(i) }
                                   # Loops and calls each task's display method with its index.
-                                  # This uses a "block" form — concise one-line syntax with {}.
+                                  # This uses a "block" form, concise one-line syntax with {}.
   elsif choice == "3"             # Mark complete.
     tasks.each_with_index { |task, i| task.display(i) }
                                   # Shows all tasks with numbers.
